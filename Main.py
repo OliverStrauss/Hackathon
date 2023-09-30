@@ -1,50 +1,79 @@
-import pygame
-import sys
-
-# Initialize Pygame
-pygame.init()
-
-# Set up display
-width, height = 1000, 1000
-screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption("Tile Array Example")
-
-# Define colors
-white = (255, 255, 255)
-black = (0, 0, 0)
-
-# Define tile class
-class Tile:
-    def __init__(self, x, y, size):
-        self.x = x
-        self.y = y
-        self.size = size
-        self.color = black
-        self.border_color = white
 
 
-    def draw(self):
-        pygame.draw.rect(screen, self.color, (self.x, self.y, self.size, self.size))
-        pygame.draw.rect(screen, self.border_color, (self.x, self.y, self.size, self.size), 2)
+def display_map(map):
+    for x in range(0,25):
+        rowstr = ""
+        print("")
+        for y in range(0,25):
+            if y == 0:
+                rowstr =  rowstr + "|"
+            if map[x][y] == False:
+                rowstr =  rowstr + "O|"
+            else:
+                rowstr = rowstr + "x|"
+            
+        print(rowstr)
+
+def field_plot(matrix):
+    print("One tile is equal to 20 acres")
+    x = int(int(input("What acreage does your feild start at on the X axis"))/20)
+    y = int(int(input("What acreage does your feild start at on the Y axis"))/20)
+    xlen = int(input("What acreage of your feild is in width"))
+    ylen = int(input("What acreage of your feild is in height"))
+    xlen = int(xlen/20)
+    ylen = int(ylen/20)
+
+    print(x,y)
+    print(xlen,ylen)
+    for i in range(y,ylen+y):
+        for y in range(x, x+xlen):
+    
+            matrix[i][y] = True
 
 
-# Create a 2D array of tiles
-tile_size = 25
-num_rows = height // tile_size
-num_cols = width // tile_size
+        
 
-tile_array = [[Tile(x * tile_size, y * tile_size, tile_size) for x in range(num_cols)] for y in range(num_rows)]
+def main():
+    SCREENHEIGHT = 500
+    SCREENWIDTH = SCREENHEIGHT
 
-# Main game loop
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+    #wb = T.Screen()
+    #wb.bgcolor("green")
+    #wb.setup(SCREENWIDTH,SCREENHEIGHT)
+    #createGrid()
+     #Method 1: Using list comprehension
+rows = 25
+cols = 25
 
-    # Draw tiles
-    for row in tile_array:
-        for tile in row:
-            tile.draw()
+# Initialize a 2D array of booleans with False values
+matrix = [[False for _ in range(cols)] for _ in range(rows)]
 
-    pygame.display.flip()
+# Method 2: Using nested loops
+rows = 25
+cols = 25
+
+# Initialize a 2D array of booleans with False values
+matrix = []
+for _ in range(rows):
+    row = [False] * cols
+    matrix.append(row)
+
+field_plot(matrix)
+# Printing the 2D array
+display_map(matrix)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+main()
