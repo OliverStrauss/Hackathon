@@ -5,7 +5,7 @@ import sys
 pygame.init()
 
 # Set up display
-width, height = 800, 600
+width, height = 1000, 1000
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Tile Array Example")
 
@@ -20,12 +20,16 @@ class Tile:
         self.y = y
         self.size = size
         self.color = black
+        self.border_color = white
+
 
     def draw(self):
         pygame.draw.rect(screen, self.color, (self.x, self.y, self.size, self.size))
+        pygame.draw.rect(screen, self.border_color, (self.x, self.y, self.size, self.size), 2)
+
 
 # Create a 2D array of tiles
-tile_size = 50
+tile_size = 25
 num_rows = height // tile_size
 num_cols = width // tile_size
 
